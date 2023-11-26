@@ -15,5 +15,5 @@ const ContainerSection = forwardRef(({ children, id, className, sectionName }: I
         </section>
     )
 });
-
+ContainerSection.displayName = "ContainerSection";
 export default ContainerSection
