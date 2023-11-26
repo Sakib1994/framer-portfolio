@@ -8,11 +8,14 @@ import { FaGithubSquare } from 'react-icons/fa'
 import { useSectionInView } from '@/lib/hooks'
 import ContainerSection from './section'
 import { useActiveSectionContext } from '@/context/active-section-context'
+import { useLocale, useTranslations } from 'next-intl'
 
 const StaticProfile = "https://avatars.githubusercontent.com/u/38373843?v=4";
 export function Hero() {
     const { ref } = useSectionInView("Home");
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
+    const t = useTranslations('hero');
+    const locale = useLocale();
     return (
         <ContainerSection ref={ref} className="mb-28 scroll-mt-28 max-w-3xl text-center sm:mb-0" id="home">
             <div className="flex items-center justify-center">
@@ -38,10 +41,11 @@ export function Hero() {
                 </div>
             </div>
             <motion.h1 initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }}
-                className="mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-3xl"                    >
-                <span className="font-bold">Hello, I&apos;m Md. Nazmus Sakib.</span> I&apos;m a{" "}
-                <span className="font-bold">Full-stack developer</span> with{" "}
-                <span className="font-bold">4 years</span> of experience. I enjoy
+                className="mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-3xl">
+                <span className="font-bold">{t('myself')}</span>{locale === 'jp' ? <span> <span className="font-bold">{t('experience')}</span>の経験豊富な<span className="font-bold">{t('position')}</span>です。</span> :
+                    <span>I&apos;m a{" "}
+                        <span className="font-bold">{t('position')}</span> with{" "}
+                        <span className="font-bold">{t('experience')}</span> of experience.</span>} I enjoy
                 building <span className="italic">sites & APIs</span>. My focus is{" "}
                 <span className="underline">React (Next.js)</span>, <span className="underline">Vue.js (Nuxt)</span> and <span className="underline">Node.js</span>.
             </motion.h1>
@@ -52,10 +56,10 @@ export function Hero() {
                 <Link
                     href="#contact"
                     className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
-                onClick={() => {
-                    setActiveSection("Contact");
-                    setTimeOfLastClick(Date.now());
-                }}
+                    onClick={() => {
+                        setActiveSection("Contact");
+                        setTimeOfLastClick(Date.now());
+                    }}
                 >
                     Contact me here{" "}
                     <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />

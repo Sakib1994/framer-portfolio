@@ -1,16 +1,19 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withNextIntl = require('next-intl/plugin')();
+const nextConfig = withNextIntl({
     images: {
         remotePatterns: [{
             protocol: 'https',
             hostname: "avatars.githubusercontent.com"
         }]
     },
-    experimental: { serverActions: true,serverComponentsExternalPackages: [
-        '@react-email/components',
-        '@react-email/render',
-        '@react-email/tailwind'
-    ] }
-}
+    experimental: {
+        serverComponentsExternalPackages: [
+            '@react-email/components',
+            '@react-email/render',
+            '@react-email/tailwind'
+        ]
+    }
+});
 
 module.exports = nextConfig
