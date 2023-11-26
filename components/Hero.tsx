@@ -7,10 +7,12 @@ import { HiDownload } from 'react-icons/hi'
 import { FaGithubSquare } from 'react-icons/fa'
 import { useSectionInView } from '@/lib/hooks'
 import ContainerSection from './section'
+import { useActiveSectionContext } from '@/context/active-section-context'
 
 const StaticProfile = "https://avatars.githubusercontent.com/u/38373843?v=4";
 export function Hero() {
     const { ref } = useSectionInView("Home");
+    const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
     return (
         <ContainerSection ref={ref} className="mb-28 scroll-mt-28 max-w-3xl text-center sm:mb-0" id="home">
             <div className="flex items-center justify-center">
@@ -50,10 +52,10 @@ export function Hero() {
                 <Link
                     href="#contact"
                     className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
-                // onClick={() => {
-                //     setActiveSection("Contact");
-                //     setTimeOfLastClick(Date.now());
-                // }}
+                onClick={() => {
+                    setActiveSection("Contact");
+                    setTimeOfLastClick(Date.now());
+                }}
                 >
                     Contact me here{" "}
                     <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
